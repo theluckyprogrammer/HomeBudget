@@ -1,5 +1,5 @@
 {
   "Database": {
-    "ConnectionString": "Data Source=tomaszeqhomebudget.database.windows.net;Initial Catalog=HallOFHeroes;Integrated Security=False;User ID=tomaszeq;Password=5Wengosz5!;Connect Timeout=60;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;MultipleActiveResultSets=true"
+    "ConnectionString": ""
   }
 }
