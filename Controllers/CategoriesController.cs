@@ -48,25 +48,25 @@ namespace HallOfHeroes.Controllers
         }
 
         [HttpPut]
-        public IActionResult Update([FromBody]  Hero hero)
+        public IActionResult Update([FromBody]  Category category)
         {
-            if (hero == null)
+            if (category == null)
             {
                 return BadRequest();
             }
 
-            var dbHero = _context.Categories.Find(hero.Id);
-            if (dbHero == null)
+            var dbCategory = _context.Categories.Find(category.Id);
+            if (dbCategory == null)
             {
                 return NotFound();
             }
 
 
-            dbHero.Name = hero.Name;
+            dbCategory.Name = category.Name;
 
-            _context.Update(dbHero);
+            _context.Update(dbCategory);
             _context.SaveChanges();
-            return new NoContentResult();
+            return CreatedAtRoute("GetCategory", new { id = category.Id }, category);
         }       
       
     }

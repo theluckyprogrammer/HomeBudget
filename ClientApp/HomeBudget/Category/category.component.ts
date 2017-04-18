@@ -7,7 +7,8 @@ import { DataTableModule, SharedModule, DialogModule } from 'primeng/primeng';
 
 @Component({
     selector: 'category',
-    templateUrl: './category.component.html'
+    templateUrl: './category.component.html',
+    styleUrls: ['./category.component.css']
 })
 export class CategoryComponent implements OnInit {
 
@@ -29,12 +30,12 @@ export class CategoryComponent implements OnInit {
     }
 
     update() {
-
+        this.categoryService.update(this.category).then(rCategory => this.categories[this.categories.indexOf(this.selectedCategory)].name = rCategory.name);
         this.CloseEditDialog();
     }
 
     create() {
-
+        this.categoryService.create(this.category.name).then(rCategory => this.categories.push(rCategory));
         this.CloseEditDialog();
     }
 
