@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using WebApplicationBasic.Model;
+using HomeBudget.Model;
+using HomeBudget.DatabaseContext;
 
-namespace HallOfHeroes.Controllers
+namespace HomeBudget.Controllers
 {
     [Route("api/[controller]")]
     public class CategoryController : Controller

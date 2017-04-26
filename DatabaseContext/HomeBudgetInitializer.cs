@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HomeBudget.Model;
 
-namespace WebApplicationBasic.Model
+namespace HomeBudget.DatabaseContext
 {
     public static class HomeBudgetInitializer
     {

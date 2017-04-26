@@ -8,10 +8,11 @@ using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using WebApplicationBasic.Model;
+using HomeBudget.Model;
 using Microsoft.EntityFrameworkCore;
+using HomeBudget.DatabaseContext;
 
-namespace WebApplicationBasic
+namespace HomeBudget
 {
     public class Startup
     {
