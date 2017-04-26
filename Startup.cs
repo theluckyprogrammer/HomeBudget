@@ -33,11 +33,11 @@ namespace WebApplicationBasic
         {              
             // Add framework services.
             services.AddMvc();
-            services.AddDbContext<HeroesContext>(opt => opt.UseSqlServer(Configuration["Database:ConnectionString"]));
+            services.AddDbContext<HomeBudgetContext>(opt => opt.UseSqlServer(Configuration["Database:ConnectionString"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory,  HeroesContext context)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, HomeBudgetContext context)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -67,7 +67,7 @@ namespace WebApplicationBasic
                     defaults: new { controller = "Home", action = "Index" });
             });
 
-            HeroDbInitializer.Initialize(context);
+            HomeBudgetInitializer.Initialize(context);
         }
     }
 }

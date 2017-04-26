@@ -43,7 +43,7 @@ export class HeroesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getHeroes();
+   // this.getHeroes();
   }
 
   onSelect(hero: Hero): void {

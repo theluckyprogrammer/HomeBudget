@@ -32,11 +32,11 @@ module.exports = (env) => {
                 'es6-promise',
                 'event-source-polyfill',
                 'jquery',
-                'zone.js',
                 'font-awesome/css/font-awesome.css',
                 'primeng/primeng',
                 'primeng/resources/themes/omega/theme.css',
-                'primeng/resources/primeng.min.css', 
+                'primeng/resources/primeng.min.css',                 
+                'zone.js'
             ]
         },
         output: {
