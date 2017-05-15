@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HomeBudget.Model
 {
-    public class Category
+    public class Objective
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -15,28 +15,32 @@ namespace HomeBudget.Model
 
         public string Name { get; set; }
 
+        public Category Category { get; set; }
 
+        public string Description { get; set; }
 
+        public bool IsHistorical { get; set; } = false;
 
         public override bool Equals(object obj)
         {
             if (obj == null)
                 return false;
 
-            if (obj as Category == null)
+            if (obj as Objective == null)
                 return false;
 
-            return Equals(obj as Category);
+            return Equals(obj as Objective);
         }
 
-        public bool Equals(Category c)
+        public bool Equals(Objective o)
         {
-            return Id == c.Id;
+            return Id == o.Id;
         }
 
         public override int GetHashCode()
         {
-            return Name.ToList().Sum(c => Convert.ToInt32(c));
+            return Name.ToList().Sum(c => Convert.ToInt32(c))  + Category.GetHashCode();
         }
+
     }
 }
