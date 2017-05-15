@@ -7,14 +7,8 @@ import { ButtonModule, GrowlModule, DataTableModule, SharedModule, DialogModule 
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent }         from './app.component';
-import { DashboardComponent }   from './dashboard.component';
-import { HeroesComponent }      from './heroes.component';
-import { HeroDetailComponent }  from './hero-detail.component';
-import { HeroService }          from './hero.service';
-import { HeroSearchComponent } from './hero-search.component';
-import { PrimeComponent } from './prime.component';
-import { CategoryComponent } from '../HomeBudget/Category/category.component'
-import { CategoryService } from '../HomeBudget/Category/category.service'
+import { CategoryComponent } from '../Category/category.component'
+import { CategoryService } from '../Category/category.service'
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -31,14 +25,9 @@ import { CategoryService } from '../HomeBudget/Category/category.service'
         BrowserModule
   ],
   declarations: [
-    AppComponent,
-    DashboardComponent,
-    HeroDetailComponent,
-    HeroesComponent,
-    HeroSearchComponent,
-      PrimeComponent,
+    AppComponent,   
       CategoryComponent
   ],
-  providers: [ HeroService, CategoryService ] 
+  providers: [ CategoryService ] 
 })
 export class AppModule { }
