@@ -21,7 +21,9 @@ namespace HomeBudget.Controllers
         [HttpGet]
         public IEnumerable<Category> GetAll()
         {
-            return _context.Categories.ToList();
+            return _context.Categories
+                .Where(c => !c.Id.Equals(0))
+                .ToList();
         }
 
         [HttpGet("{id}", Name = "GetCategory")]

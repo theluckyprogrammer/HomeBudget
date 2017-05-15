@@ -24,7 +24,7 @@ namespace HomeBudget.Controllers
         {
             return _context.Objectives
                 .Include(o => o.Category)                                       
-                .Where(c => !c.IsHistorical)
+                .Where(c => !c.IsHistorical)                     
                 .AsNoTracking()
                 .ToList();
         }
