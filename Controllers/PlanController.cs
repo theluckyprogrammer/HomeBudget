@@ -24,7 +24,7 @@ namespace HomeBudget.Controllers
         {
             return _context.Objectives
                 .Include(o => o.Category)                                       
-                .Where(c => !c.IsHistorical)
+                .Where(c => !c.IsHistorical)                     
                 .AsNoTracking()
                 .ToList();
         }
@@ -41,13 +41,10 @@ namespace HomeBudget.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] Objective objective)
+        public IActionResult Create()
         {
-            if (objective == null)
-            {
-                return BadRequest();
-            }
-
+            Objective objective = new Objective();
+            objective.Category = _context.DefaultCategory;            
             _context.Add(objective);
             _context.SaveChanges();
             return CreatedAtRoute("GetObjective", new { id = objective.Id }, objective);

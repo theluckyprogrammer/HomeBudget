@@ -10,6 +10,9 @@ import { AppComponent }         from './app.component';
 import { CategoryComponent } from '../Category/category.component'
 import { CategoryService } from '../Category/category.service'
 
+import { PlanComponent } from '../Plan/plan.component'
+import { PlanService } from '../Plan/plan.service'
+
 @NgModule({
     bootstrap: [AppComponent],
     imports: [
@@ -26,8 +29,9 @@ import { CategoryService } from '../Category/category.service'
   ],
   declarations: [
     AppComponent,   
-      CategoryComponent
+      CategoryComponent,
+      PlanComponent
   ],
-  providers: [ CategoryService ] 
+  providers: [ CategoryService, PlanService ] 
 })
 export class AppModule { }

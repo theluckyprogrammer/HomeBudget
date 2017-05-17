@@ -26,8 +26,9 @@ namespace HomeBudget.DatabaseContext
             };
 
             context.Categories.AddRange(categories);
-            context.SaveChanges();
+            context.SaveChanges();           
 
         }
+       
     }
 }

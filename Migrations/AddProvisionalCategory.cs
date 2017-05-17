@@ -12,17 +12,25 @@ namespace HomeBudget.Migrations
             migrationBuilder.DropIndex(name: "IX_Objectives_CategoryId", table: "Objectives");
 
             migrationBuilder.Sql(@"                                              
-            DBCC CHECKIDENT('[Categories]', RESEED, 0);
-            ");   
+            DBCC CHECKIDENT('[Categories]', RESEED, 1);
+            ");
 
             migrationBuilder.Sql(@"                                              
+            SET IDENTITY_INSERT [dbo].[Categories] ON ;
+            ");
+           
+            migrationBuilder.Sql(@"                                              
             INSERT INTO [dbo].[Categories]
-                       ([Name])
+                       ([Id], [Name])
                  VALUES
-                       ('_template')  ;
-            ");             
-            
-            migrationBuilder.AlterColumn<long>("CategoryId", "Objectives",  defaultValueSql: "1");
+                       (0, '_template')  ;
+            ");
+
+            migrationBuilder.Sql(@"                                              
+            SET IDENTITY_INSERT [dbo].[Categories] OFF ;
+            ");
+
+            migrationBuilder.AlterColumn<long>("CategoryId", "Objectives",  defaultValueSql: "0");
 
             migrationBuilder.CreateIndex(
              name: "IX_Objectives_CategoryId",
