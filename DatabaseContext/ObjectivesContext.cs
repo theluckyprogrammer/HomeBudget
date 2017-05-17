@@ -8,11 +8,12 @@ namespace HomeBudget.DatabaseContext
 {
     public partial class HomeBudgetContext
     {
-       public void Add(Objective objective)
+        public Category DefaultCategory { get; internal set; }
+
+        public void Add(Objective objective)
        {
             AddCategory(objective); 
-            Objectives.Add(objective);
-          
+            Objectives.Add(objective);           
        }
 
        private void AddCategory(Objective objective)
