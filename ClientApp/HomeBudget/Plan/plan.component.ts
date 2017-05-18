@@ -13,10 +13,10 @@ import { PlanService } from './plan.service';
 export class PlanComponent implements OnInit {
 
     public objectives: Objective[];
-    public selectedObjective: Objective;
 
     public saveMode: Number;
     public displayDialog: boolean;
+    private addRowLocked: boolean;
     
 
     constructor(private planService: PlanService ) { }
@@ -24,23 +24,32 @@ export class PlanComponent implements OnInit {
     ngOnInit() {
         this.planService.getObjectives().then(rObjectives => {
             this.objectives = rObjectives;
-        });
 
-        if (this.objectives != undefined)
-            return;
+            if (this.objectives.length != 0)
+                return;
 
-        this.planService.create().then(rObjective => this.objectives[this.objectives.indexOf(this.selectedObjective)] = rObjective);
+            this.planService.create().then(rObjective => this.objectives.push(rObjective));
+        });       
     }   
 
     onEdit(event) {
-        if (this.objectives.indexOf(this.selectedObjective) != this.objectives.length - 1)
+
+        if (this.addRowLocked)
+            return
+       
+        if (this.objectives.find(o => o.id > event.data.id) != undefined)
             return;
 
-        this.planService.create().then(rObjective => this.objectives.push(rObjective));
+        this.addRowLocked = true;
+
+        this.planService.create().then(rObjective => {
+            this.objectives.push(rObjective)
+            this.addRowLocked = false;
+        });
     } 
 
     onEditComplete(event) {
-        
-        this.planService.update(this.selectedObjective).then(rObjective => this.objectives.push(rObjective));
+       var selectedObjective = this.objectives.find(o => o.id == event.data.id);
+       this.planService.update(selectedObjective).then(rObjective => this.objectives[this.objectives.indexOf(selectedObjective)] = rObjective);
     } 
 }

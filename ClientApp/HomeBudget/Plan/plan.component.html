@@ -1,9 +1,9 @@
 ﻿<h1>Plan</h1>
 <p>Your budget plan!</p>
 
-<p-dataTable [value]="objectives" selectionMode="single" [editable]="true" [(selection)]="selectedObjective" dataKey="id" (onRowSelect)="onRowSelect($event)" (onEdit)="onEdit($event)" (onEditComplete)="onEditComplete($event)">   
+<p-dataTable [value]="objectives" [editable]="true" (onRowSelect)="onRowSelect($event)" (onEdit)="onEdit($event)" (onEditComplete)="onEditComplete($event)">   
     <p-column field="id" header="Id" [sortable]="true"></p-column>
-    <p-column field="name" header="Name"  [sortable]="true" [editable]="true"></p-column>      
+    <p-column field="name" header="Name" [sortable]="true" [editable]="true"></p-column>      
     <p-column field="description" header="Description" [sortable]="true" [editable]="true"></p-column>      
 </p-dataTable>
 

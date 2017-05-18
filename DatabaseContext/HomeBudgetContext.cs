@@ -17,7 +17,7 @@ namespace HomeBudget.DatabaseContext
         public HomeBudgetContext(DbContextOptions<HomeBudgetContext> options)
             : base(options)
         {
-            DefaultCategory = Categories.Single(c => c.Id.Equals(0));
+            DefaultCategoryId = -1;
         }
       
     }
