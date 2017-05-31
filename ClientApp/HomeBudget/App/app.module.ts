@@ -3,7 +3,7 @@ import { FormsModule }   from '@angular/forms';
 import { HttpModule }    from '@angular/http';
 import { UniversalModule } from 'angular2-universal';
 import { AppRoutingModule } from './app-routing.module';
-import { ButtonModule, GrowlModule, DataTableModule, SharedModule, DialogModule } from 'primeng/primeng';
+import { ButtonModule, GrowlModule, DataTableModule, SharedModule, DialogModule, DropdownModule } from 'primeng/primeng';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent }         from './app.component';
@@ -25,7 +25,8 @@ import { PlanService } from '../Plan/plan.service'
         DataTableModule,
         SharedModule,
         DialogModule,
-        BrowserModule
+        BrowserModule,
+        DropdownModule
   ],
   declarations: [
     AppComponent,   
