@@ -53,7 +53,7 @@ namespace HomeBudget.Controllers
         [HttpPut]
         public IActionResult Update([FromBody]  Objective objective)
         {
-            if (objective == null)
+          if (objective == null)
             {
                 return BadRequest();
             }

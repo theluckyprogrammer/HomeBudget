@@ -6,7 +6,7 @@
     <p-column field="name" header="Name" [sortable]="true" [editable]="true"></p-column>   
     <p-column field="category.name" header="Category" [editable]="true" [style]="{'overflow':'visible'}">
         <template let-col let-objective="rowData" pTemplate="editor" >
-            <p-dropdown [(ngModel)]="objective[col.field]" [options]="dropdownCategories" (onChange)="onChange($event, objective)" (onBlur)="DropdownChanged" [autoWidth]="false" [style]="{'width':'100%'}" required="true"></p-dropdown>
+            <p-dropdown [editable]="true" [(ngModel)]="objective.category.name" [options]="dropdownCategories" (onChange)="onChange($event, objective)" (onBlur)="onBlur($event, objective)" [autoWidth]="false" [style]="{'width':'100%'}" required="true"></p-dropdown>
         </template>
     </p-column>
     <p-column field="description" header="Description" [sortable]="true" [editable]="true"></p-column>      

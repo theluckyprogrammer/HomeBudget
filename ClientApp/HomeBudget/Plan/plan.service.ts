@@ -31,7 +31,9 @@ export class PlanService {
       const url = `${this.objectiveUrl}/${id}`;
     return this.http.get(url)
       .toPromise()
-        .then(response => ObjectiveConverter.Single(response.json()))
+        .then(response => {
+           return ObjectiveConverter.Single(response.json());
+        })
       .catch(this.handleError);
   }    
 
@@ -48,7 +50,7 @@ export class PlanService {
     return this.http
         .put(url, JSON.stringify(objective), {headers: this.headers})
       .toPromise()
-        .then(() => objective)
+        .then(response => ObjectiveConverter.Single(response.json()))
       .catch(this.handleError);
   }
 

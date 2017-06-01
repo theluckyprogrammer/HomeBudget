@@ -21,19 +21,23 @@ export class PlanComponent implements OnInit {
     public displayDialog: boolean;
     private addRowLocked: boolean;
     public dropdownCategories: SelectItem[]
-    
+    private categories: Category[];
+   
 
     constructor(private planService: PlanService, private categoryService: CategoryService ) { }
 
     ngOnInit() {
 
         this.dropdownCategories = [];
+        this.categories = [];
         this.categoryService.getCategories().then(rCategories => {
 
             rCategories.forEach(category => {
-                this.dropdownCategories.push({ label: category.name, value: category });
+                this.dropdownCategories.push({ label: category.name, value: category.name });
 
             });
+
+            this.categories = rCategories;
         });
 
         this.planService.getObjectives().then(rObjectives => {
@@ -69,8 +73,40 @@ export class PlanComponent implements OnInit {
     } 
 
     onChange(event, rowData) {
-        var selectedObjective = this.objectives.find(o => o.id == rowData.id);
-        selectedObjective.category = event.value;
+        var selectedObjective = this.objectives.find(o => o.id == rowData.id);       
+        var selectedCategory = this.findCategory(event.value);
+
+        if (selectedCategory == null)
+            return;
+
+        selectedObjective.category = selectedCategory;
         this.planService.update(selectedObjective).then(rObjective => this.objectives[this.objectives.indexOf(selectedObjective)] = rObjective);
     }
+
+    findCategory(name: String): Category {
+        return this.categories.find(cat => cat.name == name);        
+    }
+
+    onBlur(event, rowData, test) {
+
+        if (event.srcElement.value == "")
+            return;
+
+        var selectedCategory = this.findCategory(event.srcElement.value);
+        var selectedObjective = this.objectives.find(o => o.id == rowData.id); 
+
+        if (selectedCategory != null)
+            return;
+
+        selectedObjective.category = new Category();
+        selectedObjective.category.name = event.srcElement.value;
+
+        this.planService.update(selectedObjective).then(rObjective => {
+        this.objectives[this.objectives.indexOf(selectedObjective)] = rObjective
+        this.categories.push(rObjective.category);
+        });
+
+        this.dropdownCategories.push({ label: event.srcElement.value, value: event.srcElement.value });
+    }
+
 }
