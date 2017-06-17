@@ -13,6 +13,9 @@ import { CategoryService } from '../Category/category.service'
 import { PlanComponent } from '../Plan/plan.component'
 import { PlanService } from '../Plan/plan.service'
 
+import { RealizationComponent } from '../Realization/realization.component'
+import { RealizationService } from '../Realization/realization.service'
+
 @NgModule({
     bootstrap: [AppComponent],
     imports: [
@@ -31,8 +34,9 @@ import { PlanService } from '../Plan/plan.service'
   declarations: [
     AppComponent,   
       CategoryComponent,
-      PlanComponent
+      PlanComponent,
+      RealizationComponent
   ],
-  providers: [ CategoryService, PlanService ] 
+  providers: [CategoryService, PlanService, RealizationService ] 
 })
 export class AppModule { }

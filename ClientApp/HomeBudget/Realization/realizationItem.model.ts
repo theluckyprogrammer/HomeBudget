@@ -1,9 +1,10 @@
 ﻿import { Category } from '../Category/category.model';
 
-export class Objective {
+export class RealizationItem {
     id: number;
     name: string;
-    category: Category;
+    categoryId: number;
+    objectiveId: number;
     description: string;
     ishistorical: boolean;
     amount: number;

@@ -14,6 +14,8 @@ namespace HomeBudget.DatabaseContext
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Objective> Objectives { get; set; }
 
+        public virtual DbSet<RealizationItem> RealizationItems { get; set; }
+
         public HomeBudgetContext(DbContextOptions<HomeBudgetContext> options)
             : base(options)
         {
