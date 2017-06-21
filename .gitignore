@@ -35,6 +35,10 @@ Obj/
 !/wwwroot/dist/_placeholder.txt
 !/ClientApp/dist/_placeholder.txt
 
+# PrimeNg workaround
+!wwwroot/dist/styles.css
+!wwwroot/dist/theme.css
+!wwwroot/dist/primeng.min.css
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
