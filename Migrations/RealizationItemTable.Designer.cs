@@ -8,9 +8,10 @@ using HomeBudget.DatabaseContext;
 namespace HomeBudget.Migrations
 {
     [DbContext(typeof(HomeBudgetContext))]
-    partial class HomeBudgetContextModelSnapshot : ModelSnapshot
+    [Migration("20170609171824_RealizationItemTable")]
+    partial class RealizationItemTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")

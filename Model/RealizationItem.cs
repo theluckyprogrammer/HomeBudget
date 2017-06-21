@@ -7,23 +7,25 @@ using System.Threading.Tasks;
 
 namespace HomeBudget.Model
 {
-    public class Objective
+    public class RealizationItem
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
 
-        public string Name { get; set; }
-
-        public Category Category { get; set; }
-
         public string Description { get; set; }
+
+        public long CategoryId { get; set; }     
+
+        public long ObjectiveId { get; set; }
 
         public bool IsHistorical { get; set; } = false;
 
         public decimal Amount { get; set; }
 
-      public override bool Equals(object obj)
+        public DateTime Date { get; set; }
+
+        public override bool Equals(object obj)
         {
             if (obj == null)
                 return false;
@@ -41,10 +43,8 @@ namespace HomeBudget.Model
 
         public override int GetHashCode()
         {
-            return Name.ToList().Sum(c => Convert.ToInt32(c))  + Category.GetHashCode();
+            return Description.ToList().Sum(c => Convert.ToInt32(c)) + Date.Minute + Date.Second + Date.Millisecond; 
         }
-
-       
 
     }
 }

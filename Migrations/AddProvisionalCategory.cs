@@ -23,14 +23,14 @@ namespace HomeBudget.Migrations
             INSERT INTO [dbo].[Categories]
                        ([Id], [Name])
                  VALUES
-                       (0, '_template')  ;
+                       (-1, '_template')  ;
             ");
 
             migrationBuilder.Sql(@"                                              
             SET IDENTITY_INSERT [dbo].[Categories] OFF ;
             ");
 
-            migrationBuilder.AlterColumn<long>("CategoryId", "Objectives",  defaultValueSql: "0");
+            migrationBuilder.AlterColumn<long>("CategoryId", "Objectives",  defaultValueSql: "-1");
 
             migrationBuilder.CreateIndex(
              name: "IX_Objectives_CategoryId",

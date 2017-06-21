@@ -1,9 +1,12 @@
 ﻿import { Component, OnInit} from '@angular/core';
 
-import { DataTableModule, SharedModule, DialogModule } from 'primeng/primeng';
+import { DataTableModule, SharedModule, DialogModule, DropdownModule, SelectItem } from 'primeng/primeng';
 
 import { Objective } from './objective.model';
 import { PlanService } from './plan.service';
+
+import { Category } from '../Category/category.model'
+import { CategoryService } from '../Category/category.service'
 
 @Component({
     selector: 'plan',
@@ -13,34 +16,97 @@ import { PlanService } from './plan.service';
 export class PlanComponent implements OnInit {
 
     public objectives: Objective[];
-    public selectedObjective: Objective;
 
     public saveMode: Number;
     public displayDialog: boolean;
-    
+    private addRowLocked: boolean;
+    public dropdownCategories: SelectItem[]
+    private categories: Category[];
+   
 
-    constructor(private planService: PlanService ) { }
+    constructor(private planService: PlanService, private categoryService: CategoryService ) { }
 
     ngOnInit() {
-        this.planService.getObjectives().then(rObjectives => {
-            this.objectives = rObjectives;
+
+        this.dropdownCategories = [];
+        this.categories = [];
+        this.categoryService.getCategories().then(rCategories => {
+
+            rCategories.forEach(category => {
+                this.dropdownCategories.push({ label: category.name, value: category.name });
+
+            });
+
+            this.categories = rCategories;
         });
 
-        if (this.objectives != undefined)
-            return;
+        this.planService.getObjectives().then(rObjectives => {
+            this.objectives = rObjectives;
 
-        this.planService.create().then(rObjective => this.objectives[this.objectives.indexOf(this.selectedObjective)] = rObjective);
+            if (this.objectives.length != 0)
+                return;
+
+            this.planService.create().then(rObjective => this.objectives.push(rObjective));
+        });       
+        
     }   
 
     onEdit(event) {
-        if (this.objectives.indexOf(this.selectedObjective) != this.objectives.length - 1)
+
+        if (this.addRowLocked)
+            return
+       
+        if (this.objectives.find(o => o.id > event.data.id) != undefined)
             return;
 
-        this.planService.create().then(rObjective => this.objectives.push(rObjective));
+        this.addRowLocked = true;
+
+        this.planService.create().then(rObjective => {
+            this.objectives.push(rObjective)
+            this.addRowLocked = false;
+        });
     } 
 
     onEditComplete(event) {
-        
-        this.planService.update(this.selectedObjective).then(rObjective => this.objectives.push(rObjective));
+       var selectedObjective = this.objectives.find(o => o.id == event.data.id);
+       this.planService.update(selectedObjective).then(rObjective => this.objectives[this.objectives.indexOf(selectedObjective)] = rObjective);
     } 
+
+    onChange(event, rowData) {
+        var selectedObjective = this.objectives.find(o => o.id == rowData.id);       
+        var selectedCategory = this.findCategory(event.value);
+
+        if (selectedCategory == null)
+            return;
+
+        selectedObjective.category = selectedCategory;
+        this.planService.update(selectedObjective).then(rObjective => this.objectives[this.objectives.indexOf(selectedObjective)] = rObjective);
+    }
+
+    findCategory(name: String): Category {
+        return this.categories.find(cat => cat.name == name);        
+    }
+
+    onBlur(event, rowData, test) {
+
+        if (event.srcElement.value == "")
+            return;
+
+        var selectedCategory = this.findCategory(event.srcElement.value);
+        var selectedObjective = this.objectives.find(o => o.id == rowData.id); 
+
+        if (selectedCategory != null)
+            return;
+
+        selectedObjective.category = new Category();
+        selectedObjective.category.name = event.srcElement.value;
+
+        this.planService.update(selectedObjective).then(rObjective => {
+        this.objectives[this.objectives.indexOf(selectedObjective)] = rObjective
+        this.categories.push(rObjective.category);
+        });
+
+        this.dropdownCategories.push({ label: event.srcElement.value, value: event.srcElement.value });
+    }
+
 }

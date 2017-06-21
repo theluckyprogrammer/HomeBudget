@@ -1,9 +1,16 @@
 ﻿<h1>Plan</h1>
 <p>Your budget plan!</p>
 
-<p-dataTable [value]="objectives" selectionMode="single" [editable]="true" [(selection)]="selectedObjective" dataKey="id" (onRowSelect)="onRowSelect($event)" (onEdit)="onEdit($event)" (onEditComplete)="onEditComplete($event)">   
+<p-dataTable [value]="objectives" [editable]="true" (onEdit)="onEdit($event)" (onEditComplete)="onEditComplete($event)">   
     <p-column field="id" header="Id" [sortable]="true"></p-column>
-    <p-column field="name" header="Name"  [sortable]="true" [editable]="true"></p-column>      
+    <p-column field="name" header="Name" [sortable]="true" [editable]="true"></p-column>   
+    <p-column field="category.name" header="Category" [editable]="true" [style]="{'overflow':'visible'}">
+        <template let-col let-objective="rowData" pTemplate="editor" >
+            <p-dropdown [editable]="true" [(ngModel)]="objective.category.name" [options]="dropdownCategories" (onChange)="onChange($event, objective)" (onBlur)="onBlur($event, objective)" [autoWidth]="false" [style]="{'width':'100%'}" required="true"></p-dropdown>
+        </template>
+    </p-column>
+    <p-column field="amount" header="Amount" [sortable]="true" [editable]="true"></p-column> 
     <p-column field="description" header="Description" [sortable]="true" [editable]="true"></p-column>      
 </p-dataTable>
 
+<p-dropdown [options]="dropdownCategories" editable="editable" (onChange)="onChange($event)" (onBlur)="onChange" (onFocus)="onChange" placeholder="Select a City"></p-dropdown>

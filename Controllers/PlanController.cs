@@ -44,7 +44,7 @@ namespace HomeBudget.Controllers
         public IActionResult Create()
         {
             Objective objective = new Objective();
-            objective.Category = _context.DefaultCategory;            
+            objective.Category = new Category { Id = -1 };     
             _context.Add(objective);
             _context.SaveChanges();
             return CreatedAtRoute("GetObjective", new { id = objective.Id }, objective);
@@ -53,7 +53,7 @@ namespace HomeBudget.Controllers
         [HttpPut]
         public IActionResult Update([FromBody]  Objective objective)
         {
-            if (objective == null)
+          if (objective == null)
             {
                 return BadRequest();
             }
@@ -64,7 +64,9 @@ namespace HomeBudget.Controllers
                 return NotFound();
             }
 
-            _context.Entry(objective.Category).State = _context.Categories.Contains(objective.Category) ? EntityState.Modified : EntityState.Added ;
+          
+            _context.Entry(objective.Category).State = _context.Categories.Contains(objective.Category) ? EntityState.Modified : EntityState.Added;                    
+
             _context.Update(objective);
         
             _context.SaveChanges();

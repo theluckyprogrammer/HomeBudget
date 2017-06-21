@@ -1,0 +1,14 @@
+﻿<h1>Plan</h1>
+<p>Your budget plan!</p>
+
+<p-dataTable [value]="realizationItems" [editable]="true" (onEdit)="onEdit($event)" (onEditComplete)="onEditComplete($event)">   
+    <p-column field="id" header="Id" [sortable]="true"></p-column>
+    <p-column field="description" header="Description" [sortable]="true" [editable]="true"></p-column>   
+    <p-column field="objectiveId" header="Objective" [editable]="true" [style]="{'overflow':'visible'}">
+        <template let-col let-objective="rowData" pTemplate="editor" >
+            <p-dropdown [(ngModel)]="objective[col.field]" [options]="dropdownObjectives" (onChange)="onChange($event, objective)" [autoWidth]="false" [style]="{'width':'100%'}" required="true"></p-dropdown>
+        </template>
+    </p-column>  
+    <p-column field="amount" header="Amount" [sortable]="true" [editable]="true"></p-column> 
+</p-dataTable>
+
