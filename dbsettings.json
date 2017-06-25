@@ -1,5 +1,5 @@
 {
   "Database": {
-    "ConnectionString": "Data Source=tomaszeqhomebudget.database.windows.net;Initial Catalog=HomeBudget;Integrated Security=False;User ID=tomaszeq;Password=8Gustlik8!;Connect Timeout=60;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;MultipleActiveResultSets=true"
+    "ConnectionString": "Data Source={FILLDATASOURCE};Initial Catalog=HomeBudget;Integrated Security=False;User ID={FILLUSERNAME};Password={FILLPASSWORD};Connect Timeout=60;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;MultipleActiveResultSets=true"
   }
 }
